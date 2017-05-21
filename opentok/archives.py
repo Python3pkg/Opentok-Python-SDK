@@ -141,7 +141,7 @@ class ArchiveList(object):
 
     def __init__(self, sdk, values):
         self.count = values.get('count')
-        self.items = list(map(lambda x: Archive(sdk, x), values.get('items', [])))
+        self.items = list([Archive(sdk, x) for x in values.get('items', [])])
 
     def __iter__(self):
         for x in self.items:
@@ -150,7 +150,7 @@ class ArchiveList(object):
     def attrs(self):
         return {
             'count': self.count,
-            'items': map(Archive.attrs, self.items)
+            'items': list(map(Archive.attrs, self.items))
         }
 
     def json(self):

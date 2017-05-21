@@ -54,8 +54,8 @@ def download(archive_id):
 
 @app.route("/start", methods=['POST'])
 def start():
-    has_audio = 'hasAudio' in request.form.keys()
-    has_video = 'hasVideo' in request.form.keys()
+    has_audio = 'hasAudio' in list(request.form.keys())
+    has_video = 'hasVideo' in list(request.form.keys())
     output_mode = OutputModes[request.form.get('outputMode')]
     archive = opentok.start_archive(session.session_id, name="Python Archiving Sample App",
                                     has_audio=has_audio, has_video=has_video, output_mode=output_mode)
